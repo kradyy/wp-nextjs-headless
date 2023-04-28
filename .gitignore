@@ -2,8 +2,8 @@
 
 #wp
 /wp/
-!/wp/wp-content/plugins
-!/wp/wp-content/themes
+!/wp/wp-content/plugins/*
+!/wp/wp-content/themes/*
 
 # dependencies
 /**/node_modules
