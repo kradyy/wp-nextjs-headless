@@ -1,0 +1,102 @@
+name: wp-headless
+recipe: wordpress
+proxy:
+  appserver:
+    - wp-headless.lndo.site
+  mailhog:
+    - mailhog.wp-headless.lndo.site
+services:
+  appserver:
+    build_internal:
+      - >-
+        curl
+        https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+        -L -o /tmp/wp-cli.phar && chmod +x /tmp/wp-cli.phar && mv
+        /tmp/wp-cli.phar /usr/local/bin/wp && php /usr/local/bin/wp --info
+    build_as_root:
+      - apt-get update && apt install nano -y
+    config:
+      php: .vscode/php.ini
+    ssl: true
+    type: "php:8.1"
+    via: apache
+    xdebug: true
+    overrides:
+      environment:
+        XDEBUG_MODE:
+    webroot: wp
+  database:
+    config: {}
+    authentication: mysql_native_password
+    type: mariadb:10.3 # "mysql:8.0.21"
+    creds:
+      user: wordpress
+      password: wordpress
+      database: wordpress
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+  phpmyadmin:
+    type: phpmyadmin
+  node:
+    type: "node:14"
+tooling:
+  composer:
+    service: appserver
+    cmd: composer --ansi
+  db-import <file>:
+    service: ":host"
+    description: Imports a dump file into a database service
+    cmd: /helpers/sql-import.sh
+    user: root
+    options:
+      host:
+        description: The database service to use
+        default: database
+        alias:
+          - h
+      no-wipe:
+        description: Do not destroy the existing database before an import
+        boolean: true
+  "db-export [file]":
+    service: ":host"
+    description: Exports database from a database service to a file
+    cmd: /helpers/sql-export.sh
+    user: root
+    options:
+      host:
+        description: The database service to use
+        default: database
+        alias:
+          - h
+      stdout:
+        description: Dump database to stdout
+  php:
+    service: appserver
+    cmd: php
+  mysql:
+    service: ":host"
+    description: Drops into a MySQL shell on a database service
+    cmd: mysql -uroot
+    options:
+      host:
+        description: The database service to use
+        default: database
+        alias:
+          - h
+  tooling:
+  wp:
+    service: appserver
+  npm:
+    service: node
+xdebug-on:
+  service: appserver
+  description: Enable xdebug for Apache.
+  cmd: rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Xdebug enabled"
+  user: root
+xdebug-off:
+  service: appserver
+  description: Disable xdebug for Apache.
+  cmd: rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Xdebug disabled"
+  user: root
