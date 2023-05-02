@@ -1,9 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 #wp
-/wp/
-!/wp/wp-content/plugins/*
-!/wp/wp-content/themes/*
+/wp/wp-admin
+/wp/wp-includes
+/wp/wp-*.php
+!/wp/wp-content/plugins
+!/wp/wp-content/themes/tailpress/
+
 
 # dependencies
 /**/node_modules
