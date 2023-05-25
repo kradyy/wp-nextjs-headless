@@ -1,29 +1,15 @@
 import Image from "next/image";
 import { useQuery, gql } from "@apollo/client";
 import client from "@/client";
-import { BlockParser } from "@/utils/Blocks";
+import { BlockParser } from "@/utils/blocks/helpers";
 import HomePage from "@/pages/HomePage";
+import ClientOnly from "@/components/ClientOnly";
+import { getBlocks } from "@/query/blocks";
 
 export default async function Home() {
   const blocks = await getBlocks();
-  return <HomePage blocks={blocks} />;
-}
-
-export async function getBlocks() {
-  const { data } = await client.query({
-    query: gql`
-      query NewQuery {
-        nodeByUri(uri: "/") {
-          ... on Page {
-            id
-            title
-            blocks
-          }
-        }
-      }
-    `,
-  });
-
-  let blocks = data.nodeByUri.blocks;
-  return BlockParser(blocks);
+  console.log(blocks)
+  return <ClientOnly>
+       <HomePage blocks={blocks} />
+    </ClientOnly>;
 }

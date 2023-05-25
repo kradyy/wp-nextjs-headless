@@ -5,7 +5,7 @@
 /wp/wp-includes
 /wp/wp-*.php
 !/wp/wp-content/plugins
-!/wp/wp-content/themes/tailpress/
+!/wp/wp-content/themes
 
 
 # dependencies
