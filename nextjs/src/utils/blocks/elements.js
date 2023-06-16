@@ -20,3 +20,15 @@ export const getFontSize = (level = 1) => {
 
     return sizes[level] || sizes[1];
 }
+
+export const parseFontSize = (size = "large") => {
+    const sizes = {
+        'base': "text-base",
+        'small': "text-sm",
+        'medium': "text-md",
+        'large': "text-lg",
+        'extra-large': "text-xl",
+    }
+
+    return sizes[size] || sizes['base'];
+}
