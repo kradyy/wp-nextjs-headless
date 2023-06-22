@@ -1,5 +1,5 @@
 import client from "@/client";
-import { BlockParser } from "@/utils/blocks/helpers";
+import { parseBlocks } from "@/utils/blocks/helpers";
 import { gql } from "@apollo/client";
 
 export async function getBlocks() {
@@ -18,6 +18,6 @@ export async function getBlocks() {
     });
   
     let blocks = data.nodeByUri.blocks;
-    return BlockParser(blocks);
+    return parseBlocks(blocks);
   }
   

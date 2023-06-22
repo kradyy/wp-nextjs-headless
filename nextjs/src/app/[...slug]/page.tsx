@@ -2,10 +2,9 @@ export const dynamicParams = true
 
 import { gql } from "@apollo/client";
 import client from "@/client";
-import { GetStaticProps } from "next";
-import useSWR from 'swr'
-import { BlockParser } from "@/utils/blocks/helpers";
-import { BlockRenderer } from "@/components/BlockRenderer";
+import { parseBlocks } from "@/utils/blocks/helpers";
+import { BlockRenderer } from "@/blocks/BlockRenderer";
+import Header from "@/components/Header";
 
 type PageProps = {
     slug: string[];
@@ -19,7 +18,7 @@ export default async function Page ( { params }: { params: PageProps } ) {
 
   return (
     <>
-      <div>{title}</div>
+      <Header />
       <BlockRenderer blocks={blocks} />
     </>
   
@@ -46,7 +45,7 @@ const fetchPage = async (params: PageProps) => {
 
     return {
       title: data.pageBy.title,
-      blocks: BlockParser(data.pageBy.blocks),
+      blocks: parseBlocks(data.pageBy.blocks),
     };
 }
 

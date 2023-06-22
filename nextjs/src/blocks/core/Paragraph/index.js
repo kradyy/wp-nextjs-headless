@@ -1,26 +1,23 @@
 
 import React from 'react'
-import ReactHtmlParser from 'react-html-parser';
 import classNames from 'classnames';
-import { parseFontSize } from '@/utils/blocks/elements';
+import { getTextAlign, parseFontSize } from '@/utils/blocks/elements';
+import { parseBlockHTML } from '@/utils/blocks/helpers';
 
 export const Paragraph = ({block}) => {
   const { content, align, textColor, style, fontSize } = block?.attributes;
   
   const classes = classNames('paragraph', {
-    [`text-${align}`]: align,
-    [`text-${textColor}`]: textColor,
+    [`${getTextAlign(align)}`]: align,
     [`${parseFontSize(fontSize)}`]: fontSize,
+    [`text-${textColor}`]: textColor,
   })
 
   const styles = !style ? {} : {
       color: style?.color?.text || false,
   }
 
-  console.log(styles)
-  console.log(block) 
-
   return (
-    <p className={classes} style={styles}>{ReactHtmlParser(content)}</p>
+    <p className={classes} style={styles}>{parseBlockHTML(content)}</p>
   )
 }

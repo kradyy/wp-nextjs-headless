@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { BlockRenderer } from "@/components/BlockRenderer.tsx";
+import { BlockRenderer } from "@/blocks/BlockRenderer";
 
 interface HomePageProps {
   blocks: object[]

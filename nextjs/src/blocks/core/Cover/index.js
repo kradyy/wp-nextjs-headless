@@ -1,6 +1,6 @@
 "use client"
 
-import { BlockRenderer } from "@/components/BlockRenderer.tsx";
+import { BlockRenderer } from "@/blocks/BlockRenderer";
 import Image from "next/image";
 
 export const Cover = ({ block }) => {
