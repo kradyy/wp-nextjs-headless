@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* TODO: Move menu logic */
+.menu-wrapper li>ul                 { transform: translatex(100%) scale(0) }
+.menu-wrapper li:hover>ul           { transform: translatex(0%) scale(1) }

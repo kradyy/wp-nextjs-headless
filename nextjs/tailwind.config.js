@@ -12,6 +12,7 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       blue: '#374151',
+      blueDarker: '#232c3a',
       white: '#fff',
     },
     extend: {
@@ -26,5 +27,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-children'),
+  ],
 }

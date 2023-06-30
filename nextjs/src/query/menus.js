@@ -16,6 +16,7 @@ export async function getMenus() {
               nodes {
                 id
                 title
+                label
                 target
                 path
                 parentId
