@@ -1,17 +1,16 @@
 import { getMenuByLocation } from "@/query/menus";
 import classNames from "classnames";
 import Link from "next/link";
-import { v4 as uuid } from "uuid";
 
 interface MenuWalkerProps {
     location: string;
     wrapper: (children: React.ReactElement[]) => JSX.Element | undefined;
     linkClass?: string | undefined;
     subMenuLinkClass?: string | undefined;
-}   
+}
 
 const MenuWalker: React.FC<MenuWalkerProps> = async ({location, wrapper: Wrapper, linkClass, subMenuLinkClass}) => {
-    const { menuItems } = await getMenuByLocation(location)
+  const { menuItems } = await getMenuByLocation(location)
 
     const mainLiClass = classNames(
         "relative"
@@ -22,19 +21,20 @@ const MenuWalker: React.FC<MenuWalkerProps> = async ({location, wrapper: Wrapper
     )
 
     const mainNavLinkClass = classNames(
-        {"relative block py-5 px-4 text-white bg-blue-700 rounded md:bg-transparent": !linkClass}
+        {"relative block py-5 px-4 text-white bg-blue-700 rounded md:bg-transparent hover:bg-blueDarker": !linkClass}
     );
 
     const subMenuNavLinkClass = classNames(
-        {"relative block py-5 px-4 text-white bg-blue-700 rounded md:bg-transparent text-sm": !subMenuLinkClass}
+        {"relative block py-5 px-4 text-white bg-blue-700 rounded md:bg-transparent text-sm whitespace-nowrap": !subMenuLinkClass}
     );
     
     const SubMenuWalker: React.FC<{ item: any, depth: number }> = ({ item, depth }) => {
         const submenuClass = classNames(
-            `submenu bg-blueDarker absolute absolute top-[100%] right-0 
+            `submenu w-auto bg-blueDarker w-full absolute absolute top-[100%]
             transition duration-150 ease-in-out origin-top-left
-            min-w-32 top-[100%] w-100 depth-${depth}`,
-            {"left-[100%]": depth > 0}
+            min-w-32 w-100 depth-${depth}`,
+            {"left-[100%]": depth > 0},
+            {"top-0": depth >= 1}
         );
 
       return (

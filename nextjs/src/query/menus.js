@@ -41,7 +41,7 @@ export async function getMenus() {
   
   export async function getMenuByLocation(location) {
     const menus = await getMenus();
-
+    
     return menus.find((menu) => {
         return menu.location.includes(location.toUpperCase())
     })
