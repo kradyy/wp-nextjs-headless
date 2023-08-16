@@ -1,19 +1,18 @@
 import React from "react";
-import { getMenuByLocation } from "@/query/menus";
+import { getMenuByLocation, getMenuCTAButton } from "@/query/menus";
 import { getSettings } from "@/query/wp";
 import MenuWalker from "@/components/MenuWalker";
+import Link from "next/link";
 
-const Header: React.FC<HeaderProps> = async () => {
-  const { generalSettingsTitle } = await getSettings();
-
+const Header = ({ pageTitle }: { pageTitle: string }) => {
   return (
     <nav className="bg-blue border-gray-200">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        <a href="#" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-            {generalSettingsTitle}
+            {pageTitle}
           </span>
-        </a>
+        </Link>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -36,9 +35,12 @@ const Header: React.FC<HeaderProps> = async () => {
             ></path>
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto menu-wrapper" id="navbar-default">
+        <div
+          className="hidden w-full md:flex md:w-auto menu-wrapper"
+          id="navbar-default"
+        >
           <MenuWalker
-            location={process.env.NEXT_PUBLIC_WP_MENU_PRIMARY || ''}
+            location={process.env.NEXT_PUBLIC_WP_MENU_PRIMARY || ""}
             wrapper={(children: React.ReactElement[]) => (
               <ul className="font-medium flex flex-row p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 relative z-40">
                 {children}
