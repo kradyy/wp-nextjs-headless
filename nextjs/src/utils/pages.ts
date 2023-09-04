@@ -12,7 +12,7 @@ const fetchPage = async (params: PageProps) => {
 
   const { data } = await client.query({
     query: gql`
-      query NewQuery($slug: String!) {
+      query PageQuery($slug: String!) {
         pageBy(uri: $slug) {
           id
           title
