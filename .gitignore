@@ -6,7 +6,7 @@
 /wp/wp-*.php
 !/wp/wp-content/plugins
 !/wp/wp-content/themes
-
+/**/themes/**/vendor
 
 # dependencies
 /**/node_modules
@@ -45,3 +45,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vscode
+.vscode/*

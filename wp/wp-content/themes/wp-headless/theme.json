@@ -1,59 +1,68 @@
 {
   "version": 1,
   "settings": {
-    "layout": {
-      "contentSize": "1200px",
-      "wideSize": "1280px"
-    },
-    "color": {
-      "defaultPalette": false,
-      "defaultGradients": false,
-      "palette": [
+    "gutenberg": {
+      "categories": [
         {
-          "name": "Black",
-          "slug": "black",
-          "color": "#000000"
-        },
-        {
-          "name": "White",
-          "slug": "white",
-          "color": "#FFFFFF"
-        }
-      ]
-    },
-    "typography": {
-      "fontSizes": [
-        {
-          "name": "Small",
-          "slug": "small",
-          "size": "0.875rem"
-        },
-        {
-          "slug": "regular",
-          "name": "Regular",
-          "size": "1.5rem"
-        },
-        {
-          "slug": "large",
-          "name": "Large",
-          "size": "1.125rem"
-        },
-        {
-          "slug": "xl",
-          "name": "XL",
-          "size": "1.25rem"
-        },
-        {
-          "slug": "xxl",
-          "name": "2XL",
-          "size": "1.5rem"
-        },
-        {
-          "slug": "xxxl",
-          "name": "3XL",
-          "size": "1.875rem"
+          "name": "Mild",
+          "slug": "mild",
+          "icon": "mild"
         }
       ]
     }
+  },
+  "layout": {
+    "contentSize": "1200px",
+    "wideSize": "1280px"
+  },
+  "color": {
+    "defaultPalette": false,
+    "defaultGradients": false,
+    "palette": [
+      {
+        "name": "Black",
+        "slug": "black",
+        "color": "#000000"
+      },
+      {
+        "name": "White",
+        "slug": "white",
+        "color": "#FFFFFF"
+      }
+    ]
+  },
+  "typography": {
+    "fontSizes": [
+      {
+        "name": "Small",
+        "slug": "small",
+        "size": "0.875rem"
+      },
+      {
+        "slug": "regular",
+        "name": "Regular",
+        "size": "1.5rem"
+      },
+      {
+        "slug": "large",
+        "name": "Large",
+        "size": "1.125rem"
+      },
+      {
+        "slug": "xl",
+        "name": "XL",
+        "size": "1.25rem"
+      },
+      {
+        "slug": "xxl",
+        "name": "2XL",
+        "size": "1.5rem"
+      },
+      {
+        "slug": "xxxl",
+        "name": "3XL",
+        "size": "1.875rem"
+      }
+    ]
   }
 }

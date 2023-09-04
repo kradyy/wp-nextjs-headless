@@ -1,0 +1,16 @@
+{
+    "name": "wp/wp-headless-boilerplate",
+    "description": "Headless WordPress Theme",
+    "keywords": [
+        "WordPress",
+        "Theme",
+        "Headless"
+    ],
+    "license": "GPL-3.0",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "WP_Headless\\": "./inc"
+        }
+    }
+}
