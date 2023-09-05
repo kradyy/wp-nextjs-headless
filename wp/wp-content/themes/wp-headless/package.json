@@ -2,10 +2,10 @@
   "name": "wp-headless",
   "version": "1.0.0",
   "description": "",
-  "main": "blocks.js",
+  "main": "gutenberg.js",
   "scripts": {
-    "gutenberg:watch": "node ./blocks.js watch",
-    "gutenberg:build": "node ./blocks.js build"
+    "gutenberg:watch": "node ./gutenberg.js watch",
+    "gutenberg:build": "node ./gutenberg.js build"
   },
   "author": "",
   "license": "ISC",
