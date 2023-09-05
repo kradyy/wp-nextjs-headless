@@ -1,7 +1,4 @@
 <?php
-define('DISALLOW_FILE_EDIT', true);
-define('DISALLOW_FILE_MODS', true);
-
 /**
  * Load all classes using PSR-4 Autoloader.
  * To add a new class, simply add a new file in the inc/ folder and follow the same namespace as the other classes.

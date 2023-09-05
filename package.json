@@ -1,0 +1,19 @@
+{
+    "name": "wp-headless",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev:gutenberg": "cd wp/wp-content/themes/wp-headless && npm run gutenberg:watch",
+        "dev:next": "cd nextjs && yarn dev",
+        "build": "todo"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.22.15",
+        "@babel/preset-env": "^7.22.15",
+        "@babel/preset-react": "^7.22.15",
+        "@wordpress/scripts": "^26.12.0",
+        "babel-loader": "^9.1.3",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
+    }
+}
