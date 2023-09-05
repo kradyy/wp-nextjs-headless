@@ -25,9 +25,22 @@ class Appearance {
      * @return void
      */
     function add_theme_supports() {
-        add_theme_support('disable-custom-colors');
-        add_theme_support('editor-gradient-presets', []);
-        add_theme_support('disable-custom-gradients', true);
+        add_theme_support(
+			'gutenberg',
+			array(
+				'responsive-embeds' => true,
+				'wide-images'       => true,
+			)
+		);
+
+		add_theme_support( 'disable-custom-colors' );
+		add_theme_support( 'disable-custom-gradients' );
+
+		add_theme_support( 'responsive-embeds' );
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'wp-block-styles' );
+
+		add_theme_support( 'editor-styles' );
     }
 
     /**
