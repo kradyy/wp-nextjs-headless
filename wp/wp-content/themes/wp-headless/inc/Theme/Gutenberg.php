@@ -28,7 +28,7 @@ class Gutenberg {
 	 */
 	public function register() {
 		if (function_exists('register_block_type')) {
-			$this->load_gutenberg_blocks();
+			add_action( 'init', array($this, 'load_gutenberg_blocks') );
 		}
 
 		if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
@@ -62,7 +62,7 @@ class Gutenberg {
 	 */
 	public function load_gutenberg_blocks() {
 		$blocks = [];
-
+		
 		$block_path = get_template_directory() . '/' . self::$block_directory_path;
 
 		if (!is_dir($block_path)) {
@@ -71,10 +71,10 @@ class Gutenberg {
 
 		foreach (glob("$block_path/*") as $folder) {
 			$build_path = $folder . '/build';
-			$include_file = trailingslashit($folder) . 'index.php';
+			$json_file = trailingslashit($folder) . 'build';
 
-			if (filetype($folder) && is_dir($build_path) && file_exists($include_file)) {
-				$blocks[] = $include_file;
+			if (filetype($folder) && is_dir($build_path) && file_exists($json_file)) {
+				$blocks[] = $json_file;
 			}
 		}
 
@@ -84,14 +84,16 @@ class Gutenberg {
 	}
 
     /**
-	 * Register the found Gutenberg blocks by including their index.php files
+	 * Register the found Gutenberg blocks
 	 *
 	 * @param array $blocks List of blocks to register.
 	 * @return void
 	 */
 	private function register_gutenberg_blocks(array $blocks) {
 		foreach ($blocks as $block) {
-			include_once($block);
+			if(register_block_type($block)) {
+				error_log('loaded - '.$block);
+			}
 		}
 	}
 }

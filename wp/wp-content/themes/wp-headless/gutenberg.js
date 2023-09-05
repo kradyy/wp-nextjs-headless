@@ -3,30 +3,29 @@ const path = require("path");
 const { execSync } = require("child_process");
 const { spawn } = require("child_process");
 
-const wpScriptsPath = "./node_modules/.bin/wp-scripts";
+const wpScriptsPath = path.resolve(__dirname, "node_modules/.bin/wp-scripts");
 
 // Function to build a single block
 function buildBlock(block) {
   console.log(`Building block: ${block}`);
-  execSync(
-    `${wpScriptsPath} build ./views/blocks/${block}/src/index.js --output-path=./views/blocks/${block}/build`,
-    { stdio: "inherit" }
-  );
+  const blockPath = path.resolve(`./views/blocks/${block}`);
+  execSync(`${wpScriptsPath} build ./src/index.js --output-path=./build`, {
+    stdio: "inherit",
+    cwd: blockPath, // Set the current working directory
+  });
 }
 
 // Function to watch a single block
 function watchBlock(block) {
   console.log(`Watching block: ${block}`);
+  const blockPath = path.resolve(`./views/blocks/${block}`);
   const child = spawn(
     wpScriptsPath,
-    [
-      "start",
-      `./views/blocks/${block}/src/index.js`,
-      "--output-path",
-      `./views/blocks/${block}/build`,
-      `--hot`, // Hot reload
-    ],
-    { stdio: "inherit" }
+    ["start", "./src/index.js", "--output-path", "./build"],
+    {
+      stdio: "inherit",
+      cwd: blockPath, // Set the current working directory
+    }
   );
 
   child.on("exit", function (code, signal) {
