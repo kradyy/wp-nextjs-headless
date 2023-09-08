@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<ruleset name="Custom">
-    <description>A custom coding standard</description>
-    <!-- Ignore all files -->
-    <exclude-pattern>*</exclude-pattern>
-</ruleset>

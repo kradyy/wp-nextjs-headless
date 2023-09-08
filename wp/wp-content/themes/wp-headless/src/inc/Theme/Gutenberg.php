@@ -19,7 +19,7 @@ class Gutenberg {
 	 *
 	 * @var string
 	 */
-	private static string $block_directory_path = 'views/blocks';
+	private static string $block_directory_path = 'src/blocks';
     
 	/**
 	 * Register class hooks
@@ -36,6 +36,17 @@ class Gutenberg {
 		} else {
 			add_filter( 'block_categories', array($this, 'add_block_categories'), 10, 1 );
 		}
+
+		add_action('enqueue_block_editor_assets', array($this, 'enqueue_tailwind_for_gutenberg'));
+	}
+
+	/**
+	 * Enqueue Tailwind CSS for Gutenberg (Admin)
+	 *
+	 * @return void
+	 */
+	function enqueue_tailwind_for_gutenberg() {
+		wp_enqueue_style('tailwind-css', get_theme_file_uri('dist/admin/tailwind.css'), [], '1.0.0');
 	}
 
     /**
@@ -91,9 +102,7 @@ class Gutenberg {
 	 */
 	private function register_gutenberg_blocks(array $blocks) {
 		foreach ($blocks as $block) {
-			if(register_block_type($block)) {
-				error_log('loaded - '.$block);
-			}
+			register_block_type($block);
 		}
 	}
 }

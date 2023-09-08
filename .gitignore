@@ -1,14 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#wp
-/wp/wp-admin
-/wp/wp-includes
-/wp/wp-*.php
-!/wp/wp-content/plugins
-!/wp/wp-content/themes
-/**/themes/**/vendor
-/**/themes/**/build
-
 # dependencies
 /**/node_modules
 /**/wp-includes
@@ -16,6 +7,7 @@
 /**/debug.log
 /.pnp
 .pnp.js
+/**/themes/*.lock
 
 # testing
 /coverage
@@ -49,3 +41,13 @@ next-env.d.ts
 
 # vscode
 .vscode/*
+
+#wp
+/wp/wp-content/*
+/wp/wp-admin
+/wp/wp-includes
+/wp/wp-*.php
+/wp/wp-content/plugins
+!/wp/wp-content/themes
+/wp/**/themes/**/vendor
+/wp/**/themes/**/build
