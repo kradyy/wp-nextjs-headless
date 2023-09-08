@@ -1,0 +1,14 @@
+{
+    "apiVersion": 2,
+    "name": "custom/demo-block",
+    "title": "Demo Block",
+    "category": "common",
+    "icon": "shield",
+    "editorScript": "file:./index.js",
+    "attributes": {
+        "content": {
+            "type": "string",
+            "default": "Hello World"
+        }
+    }
+}
