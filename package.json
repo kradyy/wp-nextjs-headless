@@ -5,7 +5,8 @@
     "scripts": {
         "dev:gutenberg:blocks": "cd wp/wp-content/themes/wp-headless && npm run gutenberg:watch",
         "dev:next": "cd nextjs && yarn dev",
-        "build": "todo"
+        "build:next": "cd nextjs && yarn build",
+        "build:wp": "cd wp/wp-content/themes/wp-headless && npm run gutenberg:build"
     },
     "devDependencies": {
         "@babel/core": "^7.22.15",

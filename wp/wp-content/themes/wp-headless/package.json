@@ -5,7 +5,7 @@
   "main": "gutenberg.js",
   "scripts": {
     "gutenberg:watch": "node ./src/gutenberg.js watch",
-    "gutenberg:build": "node ./src/gutenberg.js build",
+    "gutenberg:build": "node ./src/gutenberg.js build"
   },
   "author": "",
   "license": "ISC",
