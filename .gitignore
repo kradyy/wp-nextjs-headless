@@ -49,5 +49,6 @@ next-env.d.ts
 /wp/wp-*.php
 /wp/wp-content/plugins
 !/wp/wp-content/themes
+/wp/wp-content/themes/**/dist
 /wp/**/themes/**/vendor
 /wp/**/themes/**/build
