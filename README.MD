@@ -1,6 +1,8 @@
 # 🚀 WP-NextJS Boilerplate
 
-This is a WIP hobby project designed for headless WordPress development with Next.js, it's robust enough for production use.
+This is a WIP hobby project designed for headless WordPress development with Next.js, in the early stages but robust enough for production use with proper configuration.
+
+This setup utlizies the power of Wordpress as a backend with using Gutenberg blocks to create content and NextJS as a frontend to display the content. This allows for a more robust and flexible frontend experience while still using the power of Wordpress as a backend.
 
 ## 🛠 Tech Stack
 
@@ -8,7 +10,7 @@ This is a WIP hobby project designed for headless WordPress development with Nex
 - WordPress (Backend)
 - Apollo Client (GraphQL)
 - Tailwind CSS
-- Lando (Optional) for development
+- [Lando](https://lando.dev/) (Optional) for development
 
 ## 🎬 Quick Start
 
@@ -49,6 +51,7 @@ NEXT_PUBLIC_WP_MENU_FOOTER=footer_menu
 ## 📁 Folder Structure
 
 - `/wp/`: WordPress Installation
+- `/wp/wp-content/themes/wp-headless`: Headless WP Theme
 - `/nextjs/`: Next.js Project
 - `/shared/`: Shared resources like Tailwind config.
 
@@ -102,8 +105,8 @@ If you're using LANDO for local development, make sure to set your localhost add
 Add the following to your `wp-config.php`:
 
 ```php
-define('WP_HOME','https://localhost:63112');
-define('WP_SITEURL','https://localhost:63112');
+define('WP_HOME','https://localhost:63112'); // You find these ports by running lando info
+define('WP_SITEURL','https://localhost:63112'); // You find these ports by running lando info
 ```
 
 By setting these, WordPress will recognize the proper site URL, allowing for effective local development.
