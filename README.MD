@@ -131,10 +131,8 @@ By setting these, WordPress will recognize the proper site URL, allowing for eff
 
 Under the `wp-content/mu-plugins` folder it's included a number of must-use plugins to extend the capabilities of this project. The plugins in this folder are:
 
-- `add-wpgraphql-seo`: For adding SEO support to WPGraphQL.
 - `wp-graphql`: The backbone for enabling GraphQL support.
 - `wp-graphql-blocks-1.0.10`: For making Gutenberg blocks accessible via GraphQL.
-- `wp-graphql-blocks-acf-1.0.4`: For ACF support in WPGraphQL.
 - `wp-graphql-gutenberg`: For Gutenberg support in WPGraphQL.
 - `wp-graphql-meta-query-0.1.1`: For querying WordPress meta fields.
 - `wp-graphql-offset-pagination-0.2.0`: For advanced pagination support in WPGraphQL.
