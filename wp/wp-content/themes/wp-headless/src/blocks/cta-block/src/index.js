@@ -4,7 +4,7 @@ const { PanelBody, ColorPicker } = wp.components;
 
 import settings from "./block.json";
 
-registerBlockType("custom/cta-button121", {
+registerBlockType("customs/cta-buttonadas121", {
   edit: function (props) {
     const {
       attributes: { buttonText, buttonLink, buttonColor, align },
