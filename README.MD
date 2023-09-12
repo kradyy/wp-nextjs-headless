@@ -26,11 +26,11 @@ Navigate to both `wp` and `nextjs` folders and execute:
 npm install
 ````
 
-### 3. Environment Setup
+### 2. Environment Setup
 
 Create `.env.local` in the `/nextjs` directory and populate it with your specific environment variables.
 
-### 4. Run the Projects
+### 3. Run the Projects
 
 ```bash
 npm run dev:gutenberg:blocks
@@ -86,6 +86,14 @@ For the admin backend, blocks should be placed in the following folder:
 
 This folder is where you'll create the actual Gutenberg blocks using PHP and JavaScript. These blocks will be available in the WordPress block editor, providing admins with a visual interface to manage content.
 
+## 🎨 Tailwind CSS Configuration
+
+This project uses Tailwind CSS for styling. The configuration for Tailwind is shared between the WordPress backend and the Next.js frontend to ensure a consistent styling experience across both platforms.
+
+### Shared Configuration between WordPress and Next.js
+
+The Tailwind configuration file is located in the `/shared/tailwind.config.js` directory. This shared setup makes it easier to maintain and ensures that any changes to the Tailwind configuration are reflected across both WordPress and Next.js.
+
 ## 🔄 Hot Reloading for Gutenberg Blocks
 
 To enable hot-reloading during Gutenberg block development, you can use WordPress's built-in `SCRIPT_DEBUG` constant. This will ensure that the most recent changes are fetched without manual page reloading.
@@ -128,7 +136,7 @@ Under the `wp-content/mu-plugins` folder it's included a number of must-use plug
 This project is licensed under the MIT License.
 
 ```
-MIT Copyright 2023 Chris
+MIT Copyright 2023 Chris "kradyy"
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
