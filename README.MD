@@ -20,17 +20,17 @@ This setup utlizies the power of Wordpress as a backend with using Gutenberg blo
 git clone https://github.com/kradyy/wp-nextjs-headless
 
 
-## 2. Install Dependencies
+### 2. Install Dependencies
 Navigate to both `wp` and `nextjs` folders and execute:
 ```bash
 npm install
 ````
 
-## 3. Environment Setup
+### 3. Environment Setup
 
 Create `.env.local` in the `/nextjs` directory and populate it with your specific environment variables.
 
-## 4. Run the Projects
+### 4. Run the Projects
 
 ```bash
 npm run dev:gutenberg:blocks
@@ -98,7 +98,7 @@ define( 'SCRIPT_DEBUG', true );
 
 This enables debugging for scripts and stylesheets, making it easier to spot issues and test changes in real time when used in conjunction with `wp-scripts`.
 
-## 🌐 Setting Localhost Addresses with LANDO
+## 🌐 Extra: Making Hot Reloading work with LANDO
 
 If you're using LANDO for local development, make sure to set your localhost addresses for WordPress to get the live-reloading to work.
 
@@ -128,7 +128,7 @@ Under the `wp-content/plugins` folder, we have included a number of must-use plu
 This project is licensed under the MIT License.
 
 ```
-MIT Copyright 2023 Your Name or Organization
+MIT Copyright 2023 Chris
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
