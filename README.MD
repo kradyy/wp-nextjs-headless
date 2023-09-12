@@ -16,15 +16,23 @@ This setup utlizies the power of Wordpress as a backend with using Gutenberg blo
 
 ### 1. Clone the Repo
 
-````bash
+```bash
 git clone https://github.com/kradyy/wp-nextjs-headless
-
+```
 
 ### 2. Install Dependencies
+
 Navigate to both `wp` and `nextjs` folders and execute:
+
 ```bash
 npm install
-````
+```
+
+To install lando, go to any folder and type:
+
+```bash
+lando rebuild -y
+```
 
 ### 2. Environment Setup
 
