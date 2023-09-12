@@ -43,9 +43,11 @@ next-env.d.ts
 .vscode/*
 
 #wp
-/wp/wp-content/*
+/wp/*
 /wp/wp-admin
 /wp/wp-includes
+/wp/wp-content/*
+/wp/wp-content/uploads/*
 /wp/wp-*.php
 /wp/wp-content/plugins
 !/wp/wp-content/themes
