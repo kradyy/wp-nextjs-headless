@@ -113,7 +113,7 @@ By setting these, WordPress will recognize the proper site URL, allowing for eff
 
 ## 🎯 Must-Use Plugins
 
-Under the `wp-content/plugins` folder, we have included a number of must-use plugins to extend the capabilities of this project. The plugins in this folder are:
+Under the `wp-content/mu-plugins` folder it's included a number of must-use plugins to extend the capabilities of this project. The plugins in this folder are:
 
 - `add-wpgraphql-seo`: For adding SEO support to WPGraphQL.
 - `wp-graphql`: The backbone for enabling GraphQL support.

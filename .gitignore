@@ -44,17 +44,15 @@ next-env.d.ts
 
 #wp
 /wp/*
+!/wp/wp-content
 /wp/wp-admin
 /wp/wp-includes
 /wp/wp-content/*
+!/wp/wp-content/mu-plugins
 /wp/wp-content/uploads/*
 /wp/wp-*.php
-
-/wp/wp-content/plugins
-!/wp/wp-content/plugins/wp-*
-!/wp/wp-content/plugins/add-wpgraphql-seo
-
-!/wp/wp-content/themes
+/wp/wp-content/plugins/*
 /wp/wp-content/themes/**/dist
-/wp/**/themes/**/vendor
-/wp/**/themes/**/build
+!/wp/wp-content/themes  # Un-ignore themes
+/wp/wp-content/themes/**/vendor/*
+/wp/wp-content/themes/**/build/*
