@@ -1,0 +1,15 @@
+@tailwind components;
+
+.menu-wrapper li > ul {
+  transform: translatex(100%) scale(0);
+}
+
+.menu-wrapper li:hover > ul {
+  transform: translatex(0%) scale(1);
+}
+
+@layer components {
+  .btn {
+    @apply hover:opacity-75 bg-blueDarker flex items-center text-white py-3 px-3;
+  }
+}
