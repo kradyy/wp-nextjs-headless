@@ -10,7 +10,29 @@ module.exports = {
     "./src/utils/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+
+    // Shared
+    "./../shared/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // Safelist all colors and exempt them from purging
+  purge: {
+    safelist: [
+      // BG
+      "bg-pink",
+      "bg-white",
+      "bg-blue",
+      "bg-current",
+      "bg-transparent",
+      "bg-blueDarker",
+      // Text
+      "text-pink",
+      "text-white",
+      "text-blue",
+      "text-current",
+      "text-transparent",
+      "text-blueDarker",
+    ],
+  },
   theme: {
     colors: {
       transparent: "transparent",
@@ -22,7 +44,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        heading: "var(--display-font)",
+        display: "var(--display-font)",
         body: "var(--body-font)",
       },
       backgroundImage: {
