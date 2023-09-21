@@ -33,7 +33,6 @@ class Appearance {
 			)
 		);
 
-		add_theme_support( 'disable-custom-colors' );
 		add_theme_support( 'disable-custom-gradients' );
 
 		add_theme_support( 'responsive-embeds' );

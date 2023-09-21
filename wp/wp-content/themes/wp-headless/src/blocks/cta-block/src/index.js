@@ -1,61 +1,140 @@
-const { registerBlockType } = wp.blocks;
-const { RichText, BlockControls, AlignmentToolbar } = wp.blockEditor;
-const { PanelBody, ColorPicker } = wp.components;
+import { registerBlockType } from "@wordpress/blocks";
+import {
+  InspectorControls,
+  PanelColorSettings,
+  BlockControls,
+  RichText,
+  URLInput,
+  AlignmentToolbar,
+} from "@wordpress/block-editor";
+import classNames from "classnames";
+import {
+  ToolbarGroup,
+  ToolbarButton,
+  ColorPicker,
+  Popover,
+  PanelBody,
+} from "@wordpress/components";
+import { useState, useEffect } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
+import metadata from "./block.json";
 
-import settings from "./block.json";
+import { useColor } from "../../../gutenberg-hooks";
 
-registerBlockType("customs/cta-buttonadas121", {
+registerBlockType(metadata.name, {
+  title: "CTA Button",
   edit: function (props) {
     const {
-      attributes: { buttonText, buttonLink, buttonColor, align },
+      attributes,
+      //attributes: { buttonText, buttonLink, buttonBgColor, buttonAlign },
       setAttributes,
       isSelected,
     } = props;
 
+    const { getColorFromHex } = useColor();
+
+    const btnClass = classNames({
+      [`has-${attributes?.buttonBgColor}-background-color has-background-color`]:
+        attributes?.buttonBgColor,
+      [`has-${attributes?.buttonTextColor}-color has-text-color`]:
+        attributes?.buttonTextColor,
+      "cta-button px-4 py-3 !text-white !no-underline !rounded-sm": true,
+    });
+
+    const containerClass = classNames({
+      flex: true,
+      "justify-start": attributes.buttonAlign === "left",
+      "justify-center": attributes.buttonAlign === "center",
+      "justify-end": attributes.buttonAlign === "right",
+    });
+
+    const [isURLInputVisible, setURLInputVisibility] = useState(false);
+
+    useEffect(() => {
+      if (!isSelected) {
+        setURLInputVisibility(false);
+      }
+    }, [isSelected]);
+
     return (
       <>
+        <InspectorControls>
+          <PanelBody title="Färger">
+            <PanelColorSettings
+              title="Textfärg"
+              colorValue={attributes.buttonTextColor}
+              initialOpen={true}
+              colorSettings={[
+                {
+                  value: attributes.buttonTextColor,
+                  onChange: (hex) => {
+                    const color = getColorFromHex(hex);
+                    setAttributes({ buttonTextColor: color?.slug });
+                  },
+                  label: attributes.buttonTextColor,
+                },
+              ]}
+            />
+            <PanelColorSettings
+              title="Backgroundsfärg"
+              colorValue={attributes.buttonBgColor}
+              initialOpen={true}
+              colorSettings={[
+                {
+                  value: attributes.buttonBgColor,
+                  onChange: (hex) => {
+                    const color = getColorFromHex(hex);
+                    setAttributes({ buttonBgColor: color?.slug });
+                  },
+                  label: attributes.buttonBgColor,
+                },
+              ]}
+            />
+          </PanelBody>
+        </InspectorControls>
+
         <BlockControls>
           <AlignmentToolbar
-            value={align}
-            onChange={(newAlign) => setAttributes({ align: newAlign })}
+            value={attributes.buttonAlign}
+            onChange={(newAlign) => setAttributes({ buttonAlign: newAlign })}
           />
+
+          <ToolbarGroup>
+            <ToolbarButton
+              icon="admin-links"
+              label="Add Link"
+              onClick={() => setURLInputVisibility(!isURLInputVisible)}
+            />
+          </ToolbarGroup>
         </BlockControls>
 
-        <div className="cta-button-block">
+        <div className={containerClass}>
           <RichText
             tagName="a"
-            value={buttonText}
-            formattingControls
-            allowedFormats={["core/bold", "core/italic", "core/link"]}
+            value={attributes.buttonText}
+            allowedFormats={["core/bold", "core/italic"]}
             onChange={(newText) => setAttributes({ buttonText: newText })}
             placeholder="Enter button text..."
-            className="cta-button"
+            className={btnClass}
           />
-          {/* {isSelected && (
-              <URLInputButton
-                url={buttonLink}
-                onChange={(newURL) => setAttributes({ buttonLink: newURL })}
+
+          {isSelected && isURLInputVisible && (
+            <Popover position="bottom center">
+              <URLInput
+                value={attributes.buttonLink}
+                onChange={(newLink) => setAttributes({ buttonLink: newLink })}
+                onKeyDown={(event) => {
+                  console.log(event);
+                  if (event.keyCode === 13) {
+                    setURLInputVisibility(false);
+                  }
+                }}
               />
-            )} */}
+            </Popover>
+          )}
         </div>
       </>
     );
   },
-  save: function (props) {
-    const {
-      attributes: { buttonText, buttonLink, buttonColor },
-    } = props;
-
-    return (
-      <div className="cta-button-block">
-        <RichText.Content
-          tagName="a"
-          value={buttonText}
-          href={buttonLink}
-          className="cta-button"
-          style={{ backgroundColor: buttonColor }}
-        />
-      </div>
-    );
-  },
+  save: () => {},
 });

@@ -4,10 +4,8 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: [
-      'wp-headless.lndo.site', 
-    ]
-  }
-}
+    domains: ["wp-headless.lndo.site"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,5 +1,4 @@
 {
-    "apiVersion": 2,
     "name": "custom/cta-button",
     "title": "Call to Action Button",
     "category": "layout",
@@ -7,23 +6,24 @@
     "attributes": {
         "buttonText": {
             "type": "string",
-            "default": "Click Me"
+            "default": ""
         },
-        "align": {
+        "buttonAlign": {
             "type": "string",
             "default": "left"
         },
         "buttonLink": {
             "type": "string",
-            "default": "#"
+            "default": ""
         },
-        "buttonColor": {
+        "buttonBgColor": {
+            "type": "string",
+            "default": "white"
+        },
+        "buttonTextColor": {
             "type": "string",
             "default": "blue"
         }
-    },
-    "supports": {
-        "html": false
     },
     "editorScript": "file:./index.js"
 }

@@ -9,60 +9,80 @@
           "icon": "mild"
         }
       ]
+    },
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1280px"
+    },
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "palette": [
+        {
+          "name": "Transparent",
+          "slug": "transparent",
+          "color": "transparent"
+        },
+        {
+          "name": "Current",
+          "slug": "current",
+          "color": "currentColor"
+        },
+        {
+          "name": "Blue",
+          "slug": "blue",
+          "color": "#374151"
+        },
+        {
+          "name": "Blue Darker",
+          "slug": "blueDarker",
+          "color": "#232c3a"
+        },
+        {
+          "name": "Pink",
+          "slug": "pink",
+          "color": "#b250ba"
+        },
+        {
+          "name": "White",
+          "slug": "white",
+          "color": "#fff"
+        }
+      ]
+    },
+    "typography": {
+      "fontSizes": [
+        {
+          "name": "Small",
+          "slug": "small",
+          "size": "0.875rem"
+        },
+        {
+          "slug": "regular",
+          "name": "Regular",
+          "size": "1.5rem"
+        },
+        {
+          "slug": "large",
+          "name": "Large",
+          "size": "1.125rem"
+        },
+        {
+          "slug": "xl",
+          "name": "XL",
+          "size": "1.25rem"
+        },
+        {
+          "slug": "xxl",
+          "name": "2XL",
+          "size": "1.5rem"
+        },
+        {
+          "slug": "xxxl",
+          "name": "3XL",
+          "size": "1.875rem"
+        }
+      ]
     }
-  },
-  "layout": {
-    "contentSize": "1200px",
-    "wideSize": "1280px"
-  },
-  "color": {
-    "defaultPalette": false,
-    "defaultGradients": false,
-    "palette": [
-      {
-        "name": "Black",
-        "slug": "black",
-        "color": "#000000"
-      },
-      {
-        "name": "White",
-        "slug": "white",
-        "color": "#FFFFFF"
-      }
-    ]
-  },
-  "typography": {
-    "fontSizes": [
-      {
-        "name": "Small",
-        "slug": "small",
-        "size": "0.875rem"
-      },
-      {
-        "slug": "regular",
-        "name": "Regular",
-        "size": "1.5rem"
-      },
-      {
-        "slug": "large",
-        "name": "Large",
-        "size": "1.125rem"
-      },
-      {
-        "slug": "xl",
-        "name": "XL",
-        "size": "1.25rem"
-      },
-      {
-        "slug": "xxl",
-        "name": "2XL",
-        "size": "1.5rem"
-      },
-      {
-        "slug": "xxxl",
-        "name": "3XL",
-        "size": "1.875rem"
-      }
-    ]
   }
 }
