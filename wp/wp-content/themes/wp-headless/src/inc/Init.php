@@ -13,6 +13,7 @@ final class Init
     {
         return [
             Core\Disable::class,
+            Core\Cache::class,
             Theme\Appearance::class,
             Theme\Gutenberg::class,
         ];

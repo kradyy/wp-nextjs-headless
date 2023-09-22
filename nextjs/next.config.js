@@ -5,6 +5,7 @@ const nextConfig = {
   },
   images: {
     domains: ["wp-headless.lndo.site"],
+    domains: ["localhost"],
   },
 };
 

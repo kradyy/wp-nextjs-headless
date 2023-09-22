@@ -47,6 +47,8 @@ npm run dev:next
 
 ## 🌍 Environment Variables
 
+NextJS
+
 ```bash
 WP_GRAPHQL_URL=https://localhost/graphql
 NODE_ENV=development
@@ -54,7 +56,15 @@ NODE_TLS_REJECT_UNAUTHORIZED=0
 NEXT_PUBLIC_WP_SITE_URL=https://localhost
 NEXT_PUBLIC_WP_MENU_PRIMARY=primary_menu
 NEXT_PUBLIC_WP_MENU_FOOTER=footer_menu
+CACHE_CLEARING_SECRET=secret
 ```
+
+````
+Wordpress
+```bash
+CACHE_CLEARING_SECRET=secret
+CACHE_URL=https://localhost/api/cache/
+````
 
 ## 📁 Folder Structure
 
