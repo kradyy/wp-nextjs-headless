@@ -49,15 +49,7 @@ const getAllPages = async () => {
     `,
   });
 
-  let pages = data.pages.nodes;
-
-  return {
-    paths: pages.map((page: any) => ({
-      params: {
-        slug: page.uri.split("/").filter((item: any) => item !== ""),
-      },
-    })),
-  };
+  return data.pages.nodes;
 };
 
 export { fetchPage, getAllPages };

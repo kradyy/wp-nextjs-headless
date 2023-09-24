@@ -8,9 +8,9 @@ import { fetchPage, getAllPages } from "@/utils/pages";
 export default Page;
 
 export async function generateStaticParams() {
-  const { paths } = await getAllPages();
+  const pages = await getAllPages();
 
-  return paths.map((path: any) => ({
-    slug: path.params.slug,
+  return pages.map((page: any) => ({
+    slug: page.uri.split("/").filter((item: any) => item !== ""),
   }));
 }
