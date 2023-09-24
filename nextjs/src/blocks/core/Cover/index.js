@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { BlockRenderer } from "@/blocks/BlockRenderer";
 import Image from "next/image";
@@ -16,7 +16,7 @@ export const Cover = ({ block }) => {
         fill
       />
       <div className="max-w-5xl z-10">
-         {innerBlocks && BlockRenderer({ blocks: innerBlocks })}
+        {innerBlocks && <BlockRenderer blocks={innerBlocks} />}
       </div>
     </div>
   );
