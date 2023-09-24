@@ -1,14 +1,16 @@
 import "./globals.css";
-import { Raleway, Merriweather_Sans } from "next/font/google";
+import { Raleway, Merriweather_Sans, Poppins, Aboreto } from "next/font/google";
 
-const raleway = Raleway({
-  variable: "--display-font",
+const poppins = Poppins({
   subsets: ["latin-ext"],
+  variable: "--body-font",
+  weight: ["400", "700"],
 });
 
-const merriweather = Merriweather_Sans({
-  variable: "--body-font",
+const aboreto = Aboreto({
   subsets: ["latin-ext"],
+  variable: "--display-font",
+  weight: ["400"],
 });
 
 export const metadata = {
@@ -23,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${raleway.variable} ${merriweather.variable}`}>
+      <body className={`${poppins.variable} ${aboreto.variable}`}>
         {children}
       </body>
     </html>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Header = ({ pageTitle }: { pageTitle: string }) => {
   return (
-    <nav className="bg-blue border-gray-200">
+    <nav className="bg-blueDarker border-gray-200">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <Link href="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">

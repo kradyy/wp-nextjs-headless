@@ -58,7 +58,7 @@ const MenuWalker: React.FC<MenuWalkerProps> = async ({
               <Link href={childItem.uri} className={subMenuNavLinkClass}>
                 {childItem.label}
               </Link>
-
+              TODO: dynamic import
               {childItem?.children?.length > 0 && (
                 <SubMenuWalker item={childItem} depth={depth + 1} />
               )}
