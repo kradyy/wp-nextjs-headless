@@ -8,6 +8,37 @@ export const getTextAlign = (align = "left") => {
   return directions[align] || "text-left";
 };
 
+// TODO: Currently not used
+export const getGridCols = (cols = 1, breakOnMobile = true) => {
+  if (cols > 6) cols = 6;
+
+  let mobileCols = [
+    "grid-cols-1",
+    "grid-cols-2",
+    "grid-cols-3",
+    "grid-cols-4",
+    "grid-cols-5",
+    "grid-cols-6",
+  ];
+
+  let desktopCols = [
+    "md:grid-cols-1",
+    "md:grid-cols-2",
+    "md:grid-cols-3",
+    "md:grid-cols-4",
+    "md:grid-cols-5",
+    "md:grid-cols-6",
+  ];
+
+  const grid = cols
+    ? breakOnMobile
+      ? `grid-cols-1 ${desktopCols[cols - 1]}`
+      : `grid-cols-${mobileCols[cols - 1]} ${desktopCols[cols - 1]}`
+    : "grid-cols-auto md:grid-cols-auto";
+
+  return grid;
+};
+
 export const getContainerAlign = (align = "center") => {
   const directions = {
     left: "justify-start",

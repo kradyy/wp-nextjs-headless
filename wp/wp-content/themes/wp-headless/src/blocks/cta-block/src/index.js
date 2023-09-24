@@ -16,7 +16,6 @@ import {
   PanelBody,
 } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
 import metadata from "./block.json";
 
 import { useColor } from "../../../gutenberg-hooks";
@@ -31,7 +30,7 @@ registerBlockType(metadata.name, {
       isSelected,
     } = props;
 
-    const { getColorFromHex } = useColor();
+    const { getColorFromHex, getColorLabelFromSlug } = useColor();
 
     const btnClass = classNames({
       [`has-${attributes?.buttonBgColor}-background-color has-background-color`]:
@@ -49,6 +48,11 @@ registerBlockType(metadata.name, {
     });
 
     const [isURLInputVisible, setURLInputVisibility] = useState(false);
+
+    const [colorLabels, setColorLabels] = useState({
+      buttonTextColor: "",
+      buttonBgColor: "",
+    });
 
     useEffect(() => {
       if (!isSelected) {
@@ -71,7 +75,7 @@ registerBlockType(metadata.name, {
                     const color = getColorFromHex(hex);
                     setAttributes({ buttonTextColor: color?.slug });
                   },
-                  label: attributes.buttonTextColor,
+                  label: getColorLabelFromSlug(attributes.buttonTextColor),
                 },
               ]}
             />
@@ -86,7 +90,7 @@ registerBlockType(metadata.name, {
                     const color = getColorFromHex(hex);
                     setAttributes({ buttonBgColor: color?.slug });
                   },
-                  label: attributes.buttonBgColor,
+                  label: getColorLabelFromSlug(attributes.buttonBgColor),
                 },
               ]}
             />
@@ -120,6 +124,7 @@ registerBlockType(metadata.name, {
 
           {isSelected && isURLInputVisible && (
             <Popover position="bottom center">
+              Flytta denna
               <URLInput
                 value={attributes.buttonLink}
                 onChange={(newLink) => setAttributes({ buttonLink: newLink })}

@@ -1,10 +1,10 @@
 "use client";
 
-import { BlockRenderer } from "@/blocks/BlockRenderer";
 import { getContainerAlign } from "@/shared/blocks/elements.js";
 import classNames from "classnames";
-import Image from "next/image";
 import Link from "next/link";
+
+// TODO: Move link to side-panel instead of inline
 
 export const CtaButton = ({ block }) => {
   const background = block.attributes.url;
@@ -30,7 +30,7 @@ export const CtaButton = ({ block }) => {
 
   return (
     <div className={containerAlignment}>
-      <Link href={buttonLink} role="button" className={btnClass}>
+      <Link href={buttonLink || "#"} role="button" className={btnClass}>
         {buttonText}
       </Link>
     </div>
