@@ -1,9 +1,11 @@
 type GutenbergBlock = {
   name: string;
-  originalContent: string;
+  originalContent?: string;
   attributes: array;
-  innerBlocks: array;
+  innerBlocks?: array;
   id: string;
+  acfMeta?: any;
+  title?: any;
 };
 
 type Property = {

@@ -5,8 +5,11 @@ import classNames from "classnames";
 import Link from "next/link";
 
 // TODO: Move link to side-panel instead of inline
+interface BlockProps {
+  block: GutenbergBlock;
+}
 
-export const CtaButton = ({ block }) => {
+export const CtaButton: React.FC<BlockProps> = ({ block }) => {
   const background = block.attributes.url;
   const innerBlocks = block?.innerBlocks;
 
@@ -20,7 +23,7 @@ export const CtaButton = ({ block }) => {
 
   const btnClass = classNames({
     [`bg-${buttonBgColor || "blue"}`]: buttonBgColor,
-    [`text-${buttonTextColor | "white"}`]: buttonTextColor,
+    [`text-${buttonTextColor || "white"}`]: buttonTextColor,
     "cta-button px-4 py-3 !text-white !no-underline !rounded-sm": true,
   });
 

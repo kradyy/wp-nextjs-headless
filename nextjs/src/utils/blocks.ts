@@ -6,7 +6,7 @@ import { gql } from "@apollo/client";
 export async function getBlocks() {
   const { data } = await client.query({
     query: gql`
-      query NewQuery {
+      query BlockQuery {
         nodeByUri(uri: "/") {
           ... on Page {
             id
@@ -74,4 +74,31 @@ export const parseHTMLAttribute = (
   const element = doc.querySelector(querySelector);
 
   return element?.getAttribute(attribute);
+};
+
+export const getBlockServerData = async (
+  blocks: GutenbergBlock[],
+  pageInfo: any
+) => {
+  const getBlock = async (block: GutenbergBlock, pageInfo: any) => {
+    switch (block.name) {
+      case "custom/some-block":
+      default:
+        null;
+    }
+  };
+
+  {
+    blocks.map((block) => {
+      getBlock(block, pageInfo);
+
+      if (block.innerBlocks.length > 0) {
+        block.innerBlocks.map((innerBlock: any) => {
+          getBlock(innerBlock, pageInfo);
+        });
+      }
+    });
+
+    return blocks;
+  }
 };

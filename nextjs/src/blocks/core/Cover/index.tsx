@@ -5,14 +5,14 @@ import Image from "next/image";
 
 interface BlockProps {
   block: GutenbergBlock;
-  params: any;
+  pageInfo?: any;
 }
 
-export const Cover: React.FC<BlockProps> = ({ block, params }) => {
+export const Cover: React.FC<BlockProps> = ({ block, pageInfo }) => {
   const background = block.attributes.url;
   const innerBlocks = block?.innerBlocks;
 
-  console.log(block);
+  console.log(pageInfo);
 
   return (
     <div className="bg-slate-800 text-white h-100 min-h-[400px] flex justify-center items-center relative">
@@ -23,7 +23,9 @@ export const Cover: React.FC<BlockProps> = ({ block, params }) => {
         fill
       />
       <div className="max-w-5xl z-10">
-        {innerBlocks && <BlockRenderer blocks={innerBlocks} params={params} />}
+        {innerBlocks && (
+          <BlockRenderer blocks={innerBlocks} pageInfo={pageInfo} />
+        )}
       </div>
     </div>
   );

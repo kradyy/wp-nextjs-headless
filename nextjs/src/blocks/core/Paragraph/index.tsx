@@ -3,7 +3,12 @@ import classNames from "classnames";
 import { getTextAlign, parseFontSize } from "@/shared/blocks/elements";
 import { parseBlockHTML } from "@/utils/blocks";
 
-export const Paragraph = ({ block }) => {
+interface BlockProps {
+  block: GutenbergBlock;
+  pageInfo?: any;
+}
+
+export const Paragraph: React.FC<BlockProps> = ({ block, pageInfo }) => {
   const { content, align, textColor, style, fontSize } = block?.attributes;
 
   const classes = classNames("paragraph", {

@@ -3,8 +3,12 @@
 import { BlockRenderer } from "@/blocks/BlockRenderer";
 import classNames from "classnames";
 
-export const Column = ({ block }) => {
-  const background = block.attributes.url;
+interface BlockProps {
+  block: GutenbergBlock;
+  pageInfo?: any;
+}
+
+export const Column: React.FC<BlockProps> = ({ block, pageInfo }) => {
   const innerBlocks = block?.innerBlocks;
 
   const width = block.attributes?.width;
@@ -16,7 +20,9 @@ export const Column = ({ block }) => {
 
   return (
     <div className={columnClass} style={{ width: width || false }}>
-      {innerBlocks && <BlockRenderer blocks={innerBlocks} />}
+      {innerBlocks && (
+        <BlockRenderer blocks={innerBlocks} pageInfo={pageInfo} />
+      )}
     </div>
   );
 };

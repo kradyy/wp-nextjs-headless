@@ -11,7 +11,7 @@ export default async function Home({ params }: { params: any }) {
   return (
     <>
       <Header pageTitle={generalSettingsTitle} />
-      <BlockRenderer blocks={blocks} params={params} />
+      <BlockRenderer blocks={blocks} pageInfo={params} />
     </>
   );
 }

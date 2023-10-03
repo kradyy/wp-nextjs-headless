@@ -3,7 +3,12 @@
 import { parseHTMLAttribute } from "@/utils/blocks";
 import NextImage from "next/image";
 
-export const Image = ({ block }) => {
+interface BlockProps {
+  block: GutenbergBlock;
+  pageInfo?: any;
+}
+
+export const Image: React.FC<BlockProps> = ({ block, pageInfo }) => {
   const innerBlocks = block?.innerBlocks;
 
   const alt = parseHTMLAttribute(block.originalContent, "img", "alt");
@@ -18,7 +23,7 @@ export const Image = ({ block }) => {
       src={imageUrl}
       width={width}
       height={height}
-      alt={alt}
+      alt={alt || "image"}
       className={`image-${id}`}
     />
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { parseBlocks } from "./blocks";
+import { getBlockServerData, parseBlocks } from "./blocks";
 import { gql } from "@apollo/client";
 import client from "@/client";
 
@@ -14,6 +14,12 @@ const fetchPage = async (params: PageProps) => {
           pageId
           title
           blocks
+          __typename
+          contentType {
+            node {
+              name
+            }
+          }
         }
       }
     `,
@@ -27,13 +33,68 @@ const fetchPage = async (params: PageProps) => {
     throw new TypeError("Ops, CMS didn't return a reasonable response.");
   }
 
+  // Fetch page ACF data
+  const acf = await getAcfPageData(data);
+
+  const pageInfo = {
+    id: data.pageBy.id,
+    title: data.pageBy.title,
+    acfMeta: acf,
+    params: { ...params },
+  };
+
+  // Fetch blocks
+  const parsedBlocks = parseBlocks(data.pageBy.blocks);
+
+  // Fetch blocks server data (if any)
+  const blocks = await getBlockServerData(parsedBlocks, pageInfo);
+
   return {
-    ...data.pageBy,
-    blocks: parseBlocks(data.pageBy.blocks),
+    pageInfo: pageInfo,
+    blocks: blocks,
   };
 };
 
-export const getAllPages = async () => {
+const getAcfPageData = async (page: any) => {
+  const pageType = page.pageBy.contentType.node.name;
+  const id = page.pageBy.id;
+
+  if (!pageType || !id) return null;
+
+  switch (pageType) {
+    case "page":
+    // No data
+    case "property":
+      const { data } = await client.query({
+        query: gql`
+          query MetaQuery($id: ID!) {
+            property(id: $id) {
+              propertyFeatures {
+                price
+                petFriendly
+                hasParking
+                bedrooms
+                bathrooms
+              }
+            }
+          }
+        `,
+        variables: { id: id },
+      });
+
+      const { __typename, ...propertyFeatures } =
+        data.property.propertyFeatures;
+
+      return {
+        propertyFeatures: propertyFeatures,
+      };
+      break;
+    default:
+      return null;
+  }
+};
+
+const getAllPages = async () => {
   const { data } = await client.query({
     query: gql`
       query AllPages {
@@ -54,7 +115,7 @@ export const getAllPages = async () => {
   return [...data.pages.nodes, ...data.properties.nodes];
 };
 
-export const getCurrentPage = async (slug: string) => {
+const getCurrentPage = async (slug: string) => {
   const { data } = await client.query({
     query: gql`
       query CurrentPage($slug: String!) {
@@ -81,4 +142,4 @@ export const getCurrentPage = async (slug: string) => {
   };
 };
 
-export { fetchPage };
+export { fetchPage, getAllPages, getCurrentPage };

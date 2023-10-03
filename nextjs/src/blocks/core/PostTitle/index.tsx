@@ -1,12 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import classNames from "classnames";
 import { getFontSize, getTextAlign } from "@/shared/blocks/elements.js";
 
 const DEFAULT_HEADING_LEVEL = 2;
 
-export const Heading = ({ block }) => {
+interface BlockProps {
+  block: GutenbergBlock;
+  pageInfo?: any;
+}
+
+export const PostTitle: React.FC<BlockProps> = ({ block, pageInfo }) => {
   const { attributes } = block;
 
   const HeadingTag = `h${attributes.level || DEFAULT_HEADING_LEVEL}`;
@@ -15,8 +19,6 @@ export const Heading = ({ block }) => {
     "max-w-5xl mx-auto my-5": true,
     [`${getTextAlign(attributes.textAlign)}`]: attributes.textAlign,
     [`${getFontSize(attributes.level)}`]: attributes.level,
-    [`has-${attributes?.textColor}-color has-text-color`]:
-      attributes?.textColor,
   });
 
   return (
