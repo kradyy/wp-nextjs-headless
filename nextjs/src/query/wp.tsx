@@ -27,7 +27,3 @@ export async function getSettings() {
 
   return allSettings;
 }
-
-// export async function getAcfField() {
-//
-// }

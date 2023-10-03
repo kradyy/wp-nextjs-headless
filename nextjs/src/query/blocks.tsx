@@ -12,6 +12,11 @@ export async function getBlocks() {
             title
             blocks
           }
+          ... on Property {
+            id
+            title
+            blocks
+          }
         }
       }
     `,

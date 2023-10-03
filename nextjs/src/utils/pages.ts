@@ -45,11 +45,16 @@ const getAllPages = async () => {
             uri
           }
         }
+        properties {
+          nodes {
+            uri
+          }
+        }
       }
     `,
   });
 
-  return data.pages.nodes;
+  return [...data.pages.nodes, ...data.properties.nodes];
 };
 
 export { fetchPage, getAllPages };

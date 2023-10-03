@@ -8,10 +8,13 @@ import { Column } from "@/blocks/core/Column";
 import { Image as ImageBlock } from "@/blocks/core/Image";
 import { Group } from "@/blocks/core/Group";
 import { Block } from "@/blocks/core/Block";
+import { PostTitle } from "@/blocks/core/PostTitle";
 
 import { CtaButton } from "@/blocks/custom/CtaButton";
+import { PropertySearch } from "@/blocks/custom/PropertySearch";
 
 const RenderBlock = (block: GutenbergBlock) => {
+  console.log(block);
   switch (block.name) {
     // Core blocks
     case "core/cover":
@@ -30,10 +33,14 @@ const RenderBlock = (block: GutenbergBlock) => {
       return <Group key={block.id} block={block} />;
     case "core/block":
       return <Block key={block.id} block={block} />;
+    case "core/post-title":
+      return <PostTitle key={block.id} block={block} />;
 
     // Custom blocks
     case "custom/cta-button":
       return <CtaButton key={block.id} block={block} />;
+    case "custom/property-search":
+      return <PropertySearch key={block.id} block={block} />;
     default:
       null;
   }
