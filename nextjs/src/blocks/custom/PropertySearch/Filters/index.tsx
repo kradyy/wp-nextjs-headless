@@ -1,16 +1,11 @@
 import React, { useRef } from "react";
 import Input from "@/components/elements/Input";
-import { formHandler } from "../action";
-import useSWR from "swr";
 
 interface FiltersProps {
-  properties: Array<Property> | undefined;
-  paginationArgs: PaginationArgs;
-  setPaginationArgs: any;
   onFilter: (form: any) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({ properties, onFilter }) => {
+const Filters: React.FC<FiltersProps> = ({ onFilter }) => {
   return (
     <>
       <form

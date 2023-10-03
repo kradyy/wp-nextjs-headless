@@ -7,8 +7,18 @@ import Pagination from "./Pagination";
 import Filters from "./Filters";
 import qs from "query-string";
 import { filterHandler } from "./action";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
-export const PropertySearch = ({ block }) => {
+interface PropertySearchProps {
+  block: GutenbergBlock;
+}
+
+export const PropertySearch: React.FC<PropertySearchProps> = ({ block }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  console.log("re-rendered");
+
   const [paginationArgs, setPaginationArgs] = useState({
     page: 0,
     size: 1,
@@ -33,14 +43,18 @@ export const PropertySearch = ({ block }) => {
       filterArgs.petFriendly,
     ],
     async (url) => {
+      const searchParams = qs.parse(window.location.search);
       const params = {
-        ...qs.parse(window.location.search),
+        ...searchParams,
         size: paginationArgs.size,
-        page: parseInt(paginationArgs.page || 0),
+        page: paginationArgs.page || 0,
       };
 
       // The server way
       const fetchedData = await filterHandler(params);
+
+      // Re-set params due to server-action refreshing the page
+      window.history.pushState({}, "", pathname + "?" + qs.stringify(params));
 
       // The API Way
       // const res = await fetch(`/api/search`, {
@@ -68,7 +82,10 @@ export const PropertySearch = ({ block }) => {
 
       return fetchedData;
     },
-    { dedupingInterval: process.env.NEXT_PUBLIC_FETCH_CACHE_TIMEOUT }
+    {
+      dedupingInterval: process.env.NEXT_PUBLIC_FETCH_CACHE_TIMEOUT as any,
+      revalidateOnFocus: false,
+    }
   );
 
   // Update filter args when query string changes
@@ -78,52 +95,58 @@ export const PropertySearch = ({ block }) => {
     );
 
     setFilterArgs({
-      minPrice: parseInt(minPrice || 0),
-      maxPrice: parseInt(maxPrice || 999999),
-      hasParking: !!hasParking,
-      petFriendly: !!petFriendly,
+      minPrice: Number(minPrice || 0),
+      maxPrice: Number(maxPrice || 999999),
+      hasParking: hasParking ? 1 : 0,
+      petFriendly: petFriendly ? 1 : 0,
     });
   }, [paginationArgs.page]);
 
-  // Action to take when filter form is submitted
-  const onFilter = (e) => {
+  // Handle filter form submit
+  const onFilter = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const params = qs.parse(window.location.search);
+    console.log("form submitted");
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const filterParams = Object.fromEntries(formData.entries());
 
     const newParams = {
       ...filterParams,
+      ...(filterParams?.hasParking && {
+        hasParking: filterParams.hasParking === "on",
+      }),
+      ...(filterParams?.petFriendly && {
+        petFriendly: filterParams.petFriendly === "on",
+      }),
     };
 
     const newQueryString = qs.stringify(newParams);
 
-    window.history.pushState(
-      {},
-      "",
-      `${window.location.pathname}?${newQueryString}`
-    );
-
-    const { minPrice, maxPrice, hasParking, petFriendly } = newQueryString;
-
     setFilterArgs({
-      minPrice: parseInt(minPrice || 0),
-      maxPrice: parseInt(maxPrice || 999999),
-      hasParking: !!hasParking,
-      petFriendly: !!petFriendly,
+      minPrice: Number(filterParams.minPrice || 0),
+      maxPrice: Number(filterParams.maxPrice || 999999),
+      hasParking: filterParams.hasParking === "on" ? 1 : 0,
+      petFriendly: filterParams.petFriendly === "on" ? 1 : 0,
     });
+
+    window.history.pushState({}, "", pathname + "?" + newQueryString);
   };
 
   return (
     <>
       <Filters onFilter={onFilter} />
-      <Results properties={data?.properties} />
-      <Pagination
-        paginationArgs={paginationArgs}
-        setPaginationArgs={setPaginationArgs}
-      />
+      {!isLoading ? (
+        <Results properties={data?.properties} />
+      ) : (
+        <p>Loading..</p>
+      )}
+      {!isLoading && (
+        <Pagination
+          paginationArgs={paginationArgs}
+          setPaginationArgs={setPaginationArgs}
+        />
+      )}
     </>
   );
 };

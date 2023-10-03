@@ -17,17 +17,16 @@ const Pagination: React.FC<PaginationProps> = ({
   const searchParams = useSearchParams()!;
   const pathname = usePathname();
 
-  const urlSerachParams = new URLSearchParams(searchParams);
-  const pageIndexParams = parseInt(urlSerachParams.get("page") ?? "0");
+  const searchQuery = window.location.search;
 
-  const createQueryString = useCallback(
+  const addQueryString = useCallback(
     (name: string, value: any) => {
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams(searchQuery);
       params.set(name, value);
 
       return params.toString();
     },
-    [searchParams]
+    [searchQuery]
   );
 
   const pages = Math.ceil(paginationArgs.total / paginationArgs.size) || 0;
@@ -37,7 +36,7 @@ const Pagination: React.FC<PaginationProps> = ({
     window.history.pushState(
       {},
       "",
-      pathname + "?" + createQueryString("page", index)
+      pathname + "?" + addQueryString("page", index)
     );
 
     if (index != currentPage) {

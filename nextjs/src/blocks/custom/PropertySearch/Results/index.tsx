@@ -5,8 +5,6 @@ import Pagination from "../Pagination";
 
 interface ResultsProps {
   properties: Array<Property> | undefined;
-  paginationArgs: PaginationArgs;
-  setPaginationArgs: any;
 }
 
 const Results: React.FC<ResultsProps> = ({ properties }) => {

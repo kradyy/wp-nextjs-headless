@@ -3,6 +3,18 @@
 import client from "@/client";
 import { gql } from "@apollo/client";
 
+const formatMetaArray = (metaArray: any[]) => {
+  const formattedArray = metaArray
+    .map((item) => {
+      return `{value: ${JSON.stringify(item.value)}, key: ${JSON.stringify(
+        item.key
+      )}, compare: ${item.compare}}`;
+    })
+    .join(", ");
+
+  return `[${formattedArray}]`;
+};
+
 export const filterHandler = async (e: any) => {
   "use server";
 
@@ -20,7 +32,7 @@ export const filterHandler = async (e: any) => {
 
   if (hasParking !== undefined) {
     metaArray.push({
-      value: hasParking,
+      value: hasParking ? "1" : "0",
       key: "has_parking",
       compare: "EQUAL_TO",
     });
@@ -28,20 +40,43 @@ export const filterHandler = async (e: any) => {
 
   if (petFriendly !== undefined) {
     metaArray.push({
-      value: petFriendly,
+      value: petFriendly ? "1" : "0",
       key: "pet_friendly",
       compare: "EQUAL_TO",
     });
   }
 
+  // if (maxPrice !== undefined) {
+  //   metaArray.push({
+  //     value: maxPrice || "0",
+  //     key: "price",
+  //     compare: "LESS_THAN_OR_EQUAL_TO",
+  //   });
+  // }
+
+  // if (minPrice !== undefined) {
+  //   metaArray.push({
+  //     value: minPrice || "0",
+  //     key: "price",
+  //     compare: "GREATER_THAN_OR_EQUAL_TO",
+  //   });
+  // }
+
   const offset = size * page;
+
+  const metaText = formatMetaArray(metaArray);
+
+  console.log(metaText);
 
   const { data } = await client.query({
     query: gql`
-      query NewQuery {
-        properties(where: { 
-          offsetPagination: { offset: ${offset}, size: ${size} },
-          }) {
+    query FilterQuery {
+        properties (
+          where: { 
+              offsetPagination: { offset: ${offset}, size: ${size} } 
+              metaQuery: {metaArray: ${metaText}, relation: AND}
+            }
+        ) {
           nodes {
             propertyFeatures {
               bathrooms
@@ -68,8 +103,6 @@ export const filterHandler = async (e: any) => {
       }
     `,
   });
-
-  console.log(data.properties.nodes);
 
   return {
     properties: data.properties.nodes,
