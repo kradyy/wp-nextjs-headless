@@ -1,15 +1,39 @@
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
+import client from "@/client";
+import { gql } from "@apollo/client";
 
-// Add a uniquie ID prop to the passed blocks
-export const parseBlocks = (blocks) => {
-  // Clean the block since its coming as immutable from GraphQL
+export async function getBlocks() {
+  const { data } = await client.query({
+    query: gql`
+      query NewQuery {
+        nodeByUri(uri: "/") {
+          ... on Page {
+            id
+            title
+            blocks
+          }
+          ... on Property {
+            id
+            title
+            blocks
+          }
+        }
+      }
+    `,
+  });
+
+  let blocks = data.nodeByUri.blocks;
+  return parseBlocks(blocks);
+}
+
+export const parseBlocks = (blocks: GutenbergBlock[]) => {
   blocks = JSON.parse(JSON.stringify(blocks));
 
   let copiedBlocks = [...blocks];
 
-  const AssignId = (b) => {
-    b.forEach((block) => {
+  const AssignId = (b: any) => {
+    b.forEach((block: GutenbergBlock) => {
       if (block.innerBlocks?.length) {
         AssignId(block.innerBlocks);
       }
@@ -49,5 +73,5 @@ export const parseHTMLAttribute = (
   const doc = parser.parseFromString(htmlString, "text/html");
   const element = doc.querySelector(querySelector);
 
-  return element.getAttribute(attribute);
+  return element?.getAttribute(attribute);
 };

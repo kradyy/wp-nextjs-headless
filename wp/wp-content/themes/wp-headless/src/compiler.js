@@ -24,7 +24,7 @@ function watchBlock(block) {
   const blockPath = path.resolve(`./src/blocks/${block}`);
   const child = spawn(
     wpScriptsPath,
-    ["start", "./src/index.js", "--output-path", "./build", "--hot"],
+    ["start", "./src/index.js", "--output-path", "./build"], // opt out "--hot" for compatibility with wp-scripts
     {
       stdio: "inherit",
       cwd: blockPath,

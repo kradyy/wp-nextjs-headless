@@ -2,11 +2,15 @@
 import { PageProvider } from "@/utils/contexts/PageContext";
 import React, { useEffect, useState } from "react";
 
-interface ClientOnlyProps {
+interface ClientPageContextProps {
   children: React.ReactNode;
+  providerValue?: any;
 }
 
-const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
+const ClientPageContext: React.FC<ClientPageContextProps> = ({
+  children,
+  providerValue = false,
+}) => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -15,7 +19,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
 
   if (!hasMounted) return false;
 
-  return <>{children}</>;
+  return <PageProvider value={providerValue}>{children}</PageProvider>;
 };
 
-export default ClientOnly;
+export default ClientPageContext;

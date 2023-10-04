@@ -1,56 +1,29 @@
-// Assign menu parents with sub-levels properly
-export const assignMenuParents = (menuItems: Array<any>) => {
-    menuItems?.sort((a: any, b: any) => a.order - b.order)
+import client from "@/client";
+import { gql } from "@apollo/client";
 
-    let menu: Array<any> = [...menuItems]
+export async function getSettings() {
+  const { data } = await client.query({
+    query: gql`
+      query GetSettings {
+        allSettings {
+          generalSettingsDateFormat
+          generalSettingsDescription
+          generalSettingsEmail
+          generalSettingsLanguage
+          generalSettingsStartOfWeek
+          generalSettingsTimeFormat
+          generalSettingsTimezone
+          generalSettingsTitle
+          generalSettingsUrl
+          readingSettingsPageForPosts
+          readingSettingsPageOnFront
+          readingSettingsPostsPerPage
+        }
+      }
+    `,
+  });
 
-    const AssignParents = (items: any) => {
-        items.forEach((item: any, index: number) => {
-            if(!item?.children) {
-                item.children = []
-            }
+  const { allSettings } = data;
 
-            if(!item.depth) {
-                item.depth = 0;
-            }
-                        
-            // Assign children
-            if (item?.parentId) {
-                const findParent = menu.find((parent: any) => parent?.id === item?.parentId)
-
-                if (findParent) {
-                   findParent.children?.push(item)
-                   item.isAssigned = true;
-
-                    // Traverse up and cound how many parents are there
-                    const deph = (item: any, previousItemId?: any) => {
-                        if (previousItemId) {
-                            const nextParent = menu.find((findParent: any) => findParent?.id === previousItemId)
-                            
-                            if(!nextParent)
-                                return;
-
-                            item.depth++;
-                            deph(item, nextParent?.parentId)
-                        }
-                    }
-
-                    deph(item, item?.parentId)
-                }
-            }
-        })
-
-        // Remove parents from menu
-        menu = menu.filter((menuItem: any) => !menuItem.hasOwnProperty('isAssigned'))
-     }
-
-    AssignParents(menu)
-
-    menu = menu.filter((menuItem: any) => {
-        console.log(menuItem.isAssigned);
-        return menuItem?.isAssigned !== false
-    })
-
-    return menu
+  return allSettings;
 }
-

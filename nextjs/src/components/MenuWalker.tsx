@@ -1,4 +1,4 @@
-import { getMenuCTAButton, getMenuByLocation } from "@/query/menus";
+import { getMenuCTAButton, getMenuByLocation } from "@/utils/menu";
 import classNames from "classnames";
 import Link from "next/link";
 import Button from "./elements/Button";

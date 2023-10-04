@@ -1,17 +1,17 @@
-import HomePage from "@/pages/HomePage";
-import ClientOnly from "@/components/ClientOnly";
+import { BlockRenderer } from "@/blocks/BlockRenderer";
+import ClientPageContext from "@/components/ClientPageContext";
 import Header from "@/components/Header";
-import { getSettings } from "@/query/wp";
 import { fetchPage } from "@/utils/pages";
+import { getSettings } from "@/utils/theme";
 
-export default async function Home() {
-  const { title, blocks } = await fetchPage({ slug: ["/"] });
+export default async function Home({ params }: { params: any }) {
+  const { blocks, ...page } = await fetchPage({ slug: ["/"] });
   const { generalSettingsTitle } = await getSettings();
 
   return (
-    <ClientOnly>
+    <>
       <Header pageTitle={generalSettingsTitle} />
-      <HomePage blocks={blocks} />
-    </ClientOnly>
+      <BlockRenderer blocks={blocks} params={params} />
+    </>
   );
 }

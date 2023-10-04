@@ -5,9 +5,9 @@ import useSWR, { mutate } from "swr";
 import Results from "./Results";
 import Pagination from "./Pagination";
 import Filters from "./Filters";
-import qs from "query-string";
-import { filterHandler } from "./action";
+import { filterHandler } from "./actions";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import qs from "query-string";
 
 interface PropertySearchProps {
   block: GutenbergBlock;
@@ -16,8 +16,6 @@ interface PropertySearchProps {
 export const PropertySearch: React.FC<PropertySearchProps> = ({ block }) => {
   const router = useRouter();
   const pathname = usePathname();
-
-  console.log("re-rendered");
 
   const [paginationArgs, setPaginationArgs] = useState({
     page: 0,

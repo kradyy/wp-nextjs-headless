@@ -1,6 +1,6 @@
 "use client";
 
-import { parseHTMLAttribute } from "@/utils/blocks/helpers";
+import { parseHTMLAttribute } from "@/utils/blocks";
 import NextImage from "next/image";
 
 export const Image = ({ block }) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { getTextAlign, parseFontSize } from "@/shared/blocks/elements";
-import { parseBlockHTML } from "@/utils/blocks/helpers";
+import { parseBlockHTML } from "@/utils/blocks";
 
 export const Paragraph = ({ block }) => {
   const { content, align, textColor, style, fontSize } = block?.attributes;

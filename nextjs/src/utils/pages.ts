@@ -1,11 +1,7 @@
 import React from "react";
-import { parseBlocks } from "./blocks/helpers";
+import { parseBlocks } from "./blocks";
 import { gql } from "@apollo/client";
 import client from "@/client";
-
-type PageProps = {
-  slug: string[];
-};
 
 const fetchPage = async (params: PageProps) => {
   const slug = params.slug.join("/").toString();
@@ -15,6 +11,7 @@ const fetchPage = async (params: PageProps) => {
       query PageQuery($slug: String!) {
         pageBy(uri: $slug) {
           id
+          pageId
           title
           blocks
         }
@@ -31,12 +28,12 @@ const fetchPage = async (params: PageProps) => {
   }
 
   return {
-    title: data.pageBy.title,
+    ...data.pageBy,
     blocks: parseBlocks(data.pageBy.blocks),
   };
 };
 
-const getAllPages = async () => {
+export const getAllPages = async () => {
   const { data } = await client.query({
     query: gql`
       query AllPages {
@@ -57,4 +54,31 @@ const getAllPages = async () => {
   return [...data.pages.nodes, ...data.properties.nodes];
 };
 
-export { fetchPage, getAllPages };
+export const getCurrentPage = async (slug: string) => {
+  const { data } = await client.query({
+    query: gql`
+      query CurrentPage($slug: String!) {
+        pageBy(uri: $slug) {
+          id
+          title
+          blocks
+        }
+      }
+    `,
+    variables: {
+      slug: `${slug}`,
+    },
+  });
+
+  // Throw 404 if page is not found
+  if (!data.pageBy) {
+    throw new TypeError("Ops, CMS didn't return a reasonable response.");
+  }
+
+  return {
+    title: data.pageBy.title,
+    blocks: parseBlocks(data.pageBy.blocks),
+  };
+};
+
+export { fetchPage };

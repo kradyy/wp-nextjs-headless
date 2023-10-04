@@ -18,14 +18,6 @@ const formatMetaArray = (metaArray: any[]) => {
 export const filterHandler = async (e: any) => {
   "use server";
 
-  // const formData: any = Array.from(e.entries()).reduce(
-  //   (acc: any, [key, value]: any) => {
-  //     acc[key] = value;
-  //     return acc;
-  //   },
-  //   {}
-  // );
-
   const { hasParking, petFriendly, minPrice, maxPrice, size, page } = e;
 
   let metaArray = [];
@@ -65,8 +57,6 @@ export const filterHandler = async (e: any) => {
   const offset = size * page;
 
   const metaText = formatMetaArray(metaArray);
-
-  console.log(metaText);
 
   const { data } = await client.query({
     query: gql`

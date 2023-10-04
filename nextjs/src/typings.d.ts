@@ -29,3 +29,13 @@ type PaginationArgs = {
   size: number;
   total: number;
 };
+
+type CTAButton = {
+  target: string;
+  title: string;
+  url: string;
+};
+
+type PageProps = {
+  slug: string[];
+};

@@ -5,9 +5,10 @@ import Image from "next/image";
 
 interface BlockProps {
   block: GutenbergBlock;
+  params: any;
 }
 
-export const Cover: React.FC<BlockProps> = ({ block }) => {
+export const Cover: React.FC<BlockProps> = ({ block, params }) => {
   const background = block.attributes.url;
   const innerBlocks = block?.innerBlocks;
 
@@ -22,7 +23,7 @@ export const Cover: React.FC<BlockProps> = ({ block }) => {
         fill
       />
       <div className="max-w-5xl z-10">
-        {innerBlocks && <BlockRenderer blocks={innerBlocks} />}
+        {innerBlocks && <BlockRenderer blocks={innerBlocks} params={params} />}
       </div>
     </div>
   );

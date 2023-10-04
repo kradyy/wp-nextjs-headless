@@ -1,6 +1,4 @@
 import React from "react";
-import { getMenuByLocation, getMenuCTAButton } from "@/query/menus";
-import { getSettings } from "@/query/wp";
 import MenuWalker from "@/components/MenuWalker";
 import Link from "next/link";
 
