@@ -1,17 +1,16 @@
 import { BlockRenderer } from "@/blocks/BlockRenderer";
-import ClientPageContext from "@/components/ClientPageContext";
-import Header from "@/components/Header";
-import { fetchPage } from "@/utils/pages";
+import Header from "@/components/layout/Header";
+import { fetchPage, getAllPages } from "@/utils/pages";
 import { getSettings } from "@/utils/theme";
 
-export default async function Home({ params }: { params: any }) {
-  const { blocks, ...page } = await fetchPage({ slug: ["/"] });
+export default async function Page({ params }: { params: any }) {
+  const { blocks, pageInfo } = await fetchPage(params);
   const { generalSettingsTitle } = await getSettings();
 
   return (
     <>
       <Header pageTitle={generalSettingsTitle} />
-      <BlockRenderer blocks={blocks} pageInfo={params} />
+      <BlockRenderer blocks={blocks} pageInfo={pageInfo} />
     </>
   );
 }

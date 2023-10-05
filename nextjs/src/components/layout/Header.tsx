@@ -1,5 +1,5 @@
 import React from "react";
-import MenuWalker from "@/components/MenuWalker";
+import MenuWalker from "@/components/layout/MenuWalker";
 import Link from "next/link";
 
 const Header = ({ pageTitle }: { pageTitle: string }) => {

@@ -4,6 +4,10 @@ import { gql } from "@apollo/client";
 import client from "@/client";
 
 const fetchPage = async (params: PageProps) => {
+  if (!params.slug) {
+    params = { slug: ["/"] };
+  }
+
   const slug = params.slug.join("/").toString();
 
   const { data } = await client.query({
@@ -63,7 +67,9 @@ const getAcfPageData = async (page: any) => {
 
   switch (pageType) {
     case "page":
-    // No data
+      // No data
+      break;
+
     case "property":
       const { data } = await client.query({
         query: gql`
@@ -81,6 +87,8 @@ const getAcfPageData = async (page: any) => {
         `,
         variables: { id: id },
       });
+
+      if (!data?.property) return null;
 
       const { __typename, ...propertyFeatures } =
         data.property.propertyFeatures;

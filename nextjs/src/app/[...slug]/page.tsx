@@ -1,5 +1,5 @@
 import { BlockRenderer } from "@/blocks/BlockRenderer";
-import Header from "@/components/Header";
+import Header from "@/components/layout/Header";
 import { fetchPage, getAllPages } from "@/utils/pages";
 import { getSettings } from "@/utils/theme";
 

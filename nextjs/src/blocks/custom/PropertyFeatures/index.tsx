@@ -1,5 +1,4 @@
 import React from "react";
-import { getMetaFields } from "./actions";
 
 interface PropertyFeaturesProps {
   block: GutenbergBlock;
@@ -10,7 +9,6 @@ export const PropertyFeatures: React.FC<PropertyFeaturesProps> = ({
   block,
   pageInfo,
 }) => {
-  // Get params
   const {
     acfMeta: { propertyFeatures },
   } = pageInfo;

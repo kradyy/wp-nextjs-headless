@@ -8,6 +8,19 @@ export const getTextAlign = (align = "left") => {
   return directions[align] || "text-left";
 };
 
+export const getFlexWidth = (level = 1) => {
+  const sizes = {
+    1: "w-full",
+    2: "w-1/2",
+    3: "w-1/3",
+    4: "w-1/4",
+    5: "w-1/5",
+    6: "w-1/6",
+  };
+
+  return sizes[level] || sizes[1];
+};
+
 // TODO: Currently not used
 export const getGridCols = (cols = 1, breakOnMobile = true) => {
   if (cols > 6) cols = 6;

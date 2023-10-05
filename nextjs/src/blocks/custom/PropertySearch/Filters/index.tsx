@@ -15,7 +15,7 @@ const Filters: React.FC<FiltersProps> = ({ onFilter }) => {
     <>
       <form
         // action={formHandler}
-        className="max-w-5xl mx-auto my-5 flex gap-5 border-solid border-blue/20 border-2 p-5"
+        className="max-w-5xl mx-auto my-5 flex flex-wrap gap-5 border-solid border-blue/20 border-2 p-5"
         onSubmit={(e) => onFilter(e)}
       >
         <div className="flex-1">

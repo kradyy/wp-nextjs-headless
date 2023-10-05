@@ -10,7 +10,6 @@ interface BlockProps {
 }
 
 export const Columns: React.FC<BlockProps> = ({ block, pageInfo }) => {
-  const background = block.attributes.url;
   const innerBlocks = block?.innerBlocks;
   const isStackedOnMobile = block.attributes?.isStackedOnMobile;
 

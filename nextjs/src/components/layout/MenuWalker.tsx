@@ -1,7 +1,7 @@
 import { getMenuCTAButton, getMenuByLocation } from "@/utils/menu";
 import classNames from "classnames";
 import Link from "next/link";
-import Button from "./elements/Button";
+import Button from "../elements/Button";
 
 interface MenuWalkerProps {
   location: string;
