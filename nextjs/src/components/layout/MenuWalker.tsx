@@ -1,7 +1,7 @@
-import { getMenuCTAButton, getMenuByLocation } from "@/query/menus";
+import { getMenuCTAButton, getMenuByLocation } from "@/utils/menu";
 import classNames from "classnames";
 import Link from "next/link";
-import Button from "./elements/Button";
+import Button from "../elements/Button";
 
 interface MenuWalkerProps {
   location: string;
@@ -58,7 +58,7 @@ const MenuWalker: React.FC<MenuWalkerProps> = async ({
               <Link href={childItem.uri} className={subMenuNavLinkClass}>
                 {childItem.label}
               </Link>
-
+              TODO: dynamic import
               {childItem?.children?.length > 0 && (
                 <SubMenuWalker item={childItem} depth={depth + 1} />
               )}

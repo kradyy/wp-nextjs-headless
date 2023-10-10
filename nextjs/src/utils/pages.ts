@@ -1,18 +1,132 @@
 import React from "react";
-import { parseBlocks } from "./blocks/helpers";
+import { getBlockServerData, parseBlocks } from "./blocks";
 import { gql } from "@apollo/client";
 import client from "@/client";
 
-type PageProps = {
-  slug: string[];
-};
-
 const fetchPage = async (params: PageProps) => {
+  if (!params.slug) {
+    params = { slug: ["/"] };
+  }
+
   const slug = params.slug.join("/").toString();
 
   const { data } = await client.query({
     query: gql`
       query PageQuery($slug: String!) {
+        pageBy(uri: $slug) {
+          id
+          pageId
+          title
+          blocks
+          __typename
+          contentType {
+            node {
+              name
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      slug: `${slug}`, // Prepend with "/" if needed
+    },
+  });
+
+  // Throw 404 if page is not found
+  if (!data.pageBy) {
+    throw new TypeError("Ops, CMS didn't return a reasonable response.");
+  }
+
+  // Fetch page ACF data
+  const acf = await getAcfPageData(data);
+
+  const pageInfo = {
+    id: data.pageBy.id,
+    title: data.pageBy.title,
+    acfMeta: acf,
+    params: { ...params },
+  };
+
+  // Fetch blocks
+  const parsedBlocks = parseBlocks(data.pageBy.blocks);
+
+  // Fetch blocks server data (if any)
+  const blocks = await getBlockServerData(parsedBlocks, pageInfo);
+
+  return {
+    pageInfo: pageInfo,
+    blocks: blocks,
+  };
+};
+
+const getAcfPageData = async (page: any) => {
+  const pageType = page.pageBy.contentType.node.name;
+  const id = page.pageBy.id;
+
+  if (!pageType || !id) return null;
+
+  switch (pageType) {
+    case "page":
+      // No data
+      break;
+
+    case "property":
+      const { data } = await client.query({
+        query: gql`
+          query MetaQuery($id: ID!) {
+            property(id: $id) {
+              propertyFeatures {
+                price
+                petFriendly
+                hasParking
+                bedrooms
+                bathrooms
+              }
+            }
+          }
+        `,
+        variables: { id: id },
+      });
+
+      if (!data?.property) return null;
+
+      const { __typename, ...propertyFeatures } =
+        data.property.propertyFeatures;
+
+      return {
+        propertyFeatures: propertyFeatures,
+      };
+      break;
+    default:
+      return null;
+  }
+};
+
+const getAllPages = async () => {
+  const { data } = await client.query({
+    query: gql`
+      query AllPages {
+        pages {
+          nodes {
+            uri
+          }
+        }
+        properties {
+          nodes {
+            uri
+          }
+        }
+      }
+    `,
+  });
+
+  return [...data.pages.nodes, ...data.properties.nodes];
+};
+
+const getCurrentPage = async (slug: string) => {
+  const { data } = await client.query({
+    query: gql`
+      query CurrentPage($slug: String!) {
         pageBy(uri: $slug) {
           id
           title
@@ -21,7 +135,7 @@ const fetchPage = async (params: PageProps) => {
       }
     `,
     variables: {
-      slug: `${slug}`, // Prepend with "/" if needed
+      slug: `${slug}`,
     },
   });
 
@@ -36,28 +150,4 @@ const fetchPage = async (params: PageProps) => {
   };
 };
 
-const getAllPages = async () => {
-  const { data } = await client.query({
-    query: gql`
-      query AllPages {
-        pages {
-          nodes {
-            uri
-          }
-        }
-      }
-    `,
-  });
-
-  let pages = data.pages.nodes;
-
-  return {
-    paths: pages.map((page: any) => ({
-      params: {
-        slug: page.uri.split("/").filter((item: any) => item !== ""),
-      },
-    })),
-  };
-};
-
-export { fetchPage, getAllPages };
+export { fetchPage, getAllPages, getCurrentPage };

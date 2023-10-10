@@ -24,6 +24,31 @@
           "color": "#000000"
         },
         {
+          "name": "Transparent",
+          "slug": "transparent",
+          "color": "transparent"
+        },
+        {
+          "name": "Current",
+          "slug": "current",
+          "color": "currentColor"
+        },
+        {
+          "name": "Blue",
+          "slug": "blue",
+          "color": "#374151"
+        },
+        {
+          "name": "Blue Darker",
+          "slug": "blueDarker",
+          "color": "#232c3a"
+        },
+        {
+          "name": "Pink",
+          "slug": "pink",
+          "color": "#b250ba"
+        },
+        {
           "name": "White",
           "slug": "white",
           "color": "#FFFFFF"

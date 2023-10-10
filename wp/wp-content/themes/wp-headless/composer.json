@@ -12,5 +12,8 @@
         "psr-4": {
             "WP_Headless\\": "./src/inc"
         }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
     }
 }
