@@ -2,12 +2,11 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverActions: true,
   },
   images: {
-    domains: [
-      'wp-headless.lndo.site', 
-    ]
-  }
-}
+    domains: ["wp-headless.lndo.site", "localhost"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
