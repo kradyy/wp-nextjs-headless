@@ -1,5 +1,3 @@
-"use client";
-
 import { BlockRenderer } from "@/blocks/BlockRenderer";
 
 interface BlockProps {

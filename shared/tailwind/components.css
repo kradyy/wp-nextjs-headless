@@ -1,0 +1,5 @@
+@import "tailwindcss/components";
+
+.btn {
+  @apply hover:opacity-75 bg-blueDarker flex items-center text-white py-3 px-3;
+}

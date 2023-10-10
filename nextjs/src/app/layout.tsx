@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./tailwind.css";
 import { Raleway, Merriweather_Sans, Poppins, Aboreto } from "next/font/google";
 
 const poppins = Poppins({

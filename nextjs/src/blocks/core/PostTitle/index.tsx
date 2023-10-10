@@ -1,5 +1,3 @@
-"use client";
-
 import classNames from "classnames";
 import { getFontSize, getTextAlign } from "@/shared/blocks/elements.js";
 

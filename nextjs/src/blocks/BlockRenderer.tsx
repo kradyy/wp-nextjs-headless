@@ -12,6 +12,7 @@ import { Gallery } from "@/blocks/core/Gallery";
 import { CtaButton } from "@/blocks/custom/CtaButton";
 import { PropertySearch } from "@/blocks/custom/PropertySearch";
 import { PropertyFeatures } from "@/blocks/custom/PropertyFeatures";
+import { ListItem } from "@/blocks/custom/ListItem";
 
 export const RenderBlock = (block: GutenbergBlock, pageInfo: any) => {
   switch (block.name) {
@@ -39,6 +40,8 @@ export const RenderBlock = (block: GutenbergBlock, pageInfo: any) => {
     // Custom blocks
     case "custom/cta-button":
       return <CtaButton key={block.id} block={block} />;
+    case "custom/list-item":
+      return <ListItem key={block.id} block={block} />;
     case "custom/property-search":
       return <PropertySearch key={block.id} block={block} />;
     case "custom/property-features":
@@ -52,12 +55,12 @@ export const RenderBlock = (block: GutenbergBlock, pageInfo: any) => {
 
 interface BlockRendererProps {
   blocks: GutenbergBlock[];
-  pageInfo: any;
+  pageInfo?: any;
 }
 
 export const BlockRenderer: React.FC<BlockRendererProps> = ({
   blocks,
-  pageInfo,
+  pageInfo = false,
 }) => {
   return <>{blocks.map((block) => RenderBlock(block, pageInfo))}</>;
 };

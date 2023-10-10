@@ -40,12 +40,9 @@ function watchBlock(block) {
 // Function to build gutenberg admin styles
 function buildTailwind() {
   console.log("Building gutenberg admin styles...");
-  execSync(
-    "npx tailwindcss build -i src/tailwind.css -o dist/admin/tailwind.css",
-    {
-      stdio: "inherit",
-    }
-  );
+  execSync("npx tailwindcss build -i src/tailwind.css -o dist/admin.css", {
+    stdio: "inherit",
+  });
 }
 
 // Function to watch gutenberg admin styles
@@ -59,8 +56,9 @@ function watchTailwind() {
       "-i",
       "src/tailwind.css",
       "-o",
-      "dist/admin/tailwind.css",
+      "dist/admin.css",
       "--watch",
+      "--config=./../../../../shared/tailwind/tailwind.config.js",
     ],
     {
       stdio: "inherit",

@@ -21,6 +21,16 @@ export const getFlexWidth = (level = 1) => {
   return sizes[level] || sizes[1];
 };
 
+export const getFlexAlign = (align = "top") => {
+  const directions = {
+    top: "items-start",
+    end: "items-end",
+    center: "items-center",
+  };
+
+  return directions[align] || "items-start";
+};
+
 // TODO: Currently not used
 export const getGridCols = (cols = 1, breakOnMobile = true) => {
   if (cols > 6) cols = 6;

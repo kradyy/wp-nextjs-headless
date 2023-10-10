@@ -22,3 +22,11 @@ export async function generateStaticParams() {
     slug: page.uri.split("/").filter((item: any) => item !== ""),
   }));
 }
+
+// TODO: SEO
+// Via, next-seo
+// export async function generateMetadata({ params }: { params: any }) {
+//   return {
+//     title: "...",
+//   };
+// }

@@ -1,0 +1,5 @@
+@config "./../../../shared/tailwind/tailwind.config.js";
+@import "./../../../shared/tailwind/base.css";
+@import "./../../../shared/tailwind/components.css";
+@import "./../../../shared/tailwind/utilities.css";
+@import "./../../../shared/tailwind/custom.css";

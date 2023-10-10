@@ -1,5 +1,3 @@
-"use client";
-
 import { parseHTMLAttribute } from "@/utils/blocks";
 import NextImage from "next/image";
 

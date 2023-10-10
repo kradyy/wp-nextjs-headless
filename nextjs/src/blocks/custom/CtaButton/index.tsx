@@ -22,12 +22,14 @@ export const CtaButton: React.FC<BlockProps> = ({ block }) => {
   } = block?.attributes;
 
   const btnClass = classNames({
+    "inline-block": true,
     [`bg-${buttonBgColor || "blue"}`]: buttonBgColor,
     [`text-${buttonTextColor || "white"}`]: buttonTextColor,
     "cta-button px-4 py-3 !text-white !no-underline !rounded-sm": true,
   });
 
   const containerAlignment = classNames({
+    "btn-wrapper": true,
     [`flex w-full ${getContainerAlign(buttonAlign)}`]: buttonAlign,
   });
 

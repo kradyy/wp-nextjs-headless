@@ -2,6 +2,7 @@ import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import client from "@/client";
 import { gql } from "@apollo/client";
+import jsdom from "jsdom";
 
 export async function getBlocks() {
   const { data } = await client.query({
@@ -69,11 +70,12 @@ export const parseHTMLAttribute = (
 ) => {
   if (!attribute) return "";
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, "text/html");
-  const element = doc.querySelector(querySelector);
+  const { JSDOM } = jsdom;
 
-  return element?.getAttribute(attribute);
+  const dom = new JSDOM(htmlString);
+  const element = dom.window.document.querySelector(querySelector);
+
+  return element ? element.getAttribute(attribute) : null;
 };
 
 export const getBlockServerData = async (
